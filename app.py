@@ -1,12 +1,14 @@
-from flask import Flask, redirect, render_template
+from db import get_connection
+from flask import Flask, redirect, jsonify, render_template
 from flask import request
 from flask import url_for
 import forms
-from flask import jsonify
 from config import DevelopmentConfig
 from flask_wtf.csrf import CSRFProtect
 from models import db
 from models import Alumnos
+from maestros.routes import maestros
+
 
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
@@ -97,6 +99,9 @@ def eliminar():
          return redirect(url_for('ABCompleto'))
 
     return render_template("eliminar.html", form=create_forms)
+
+# Registra la blueprint
+app.register_blueprint(maestros)
 
 if __name__ == '__main__':
     csrf.init_app(app)

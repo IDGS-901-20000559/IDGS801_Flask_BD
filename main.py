@@ -1,23 +1,6 @@
 from db import get_connection
 
-# Consulta de todos los profesores
-def getAllTeacher():
-    profes = {}
-    try:
-        connection = get_connection()
-        with connection.cursor() as curso:
-            #Sirve para ejecutar un stored procedure
-            curso.execute('call consulta_profesores()')
-            resultset = curso.fetchall()
-            for row in resultset:
-                print(row)
-
-        connection.close()
-        
-    except Exception as ex:
-        print('Error '+ex)
-
-
+"""
 
 #Consulta de todos  los alumnos
 try:
@@ -67,3 +50,4 @@ try:
     
 except Exception as ex:
     print('Error '+ex)
+"""
