@@ -7,12 +7,12 @@ from config import DevelopmentConfig
 from flask_wtf.csrf import CSRFProtect
 from models import db
 from models import Alumnos
-from maestros.routes import maestros
-
+from resistencias.routes import resistencias
 
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
 
+app.register_blueprint(resistencias)
 csrf = CSRFProtect()
 
 @app.route('/', methods = ['GET', 'POST'])
@@ -100,8 +100,6 @@ def eliminar():
 
     return render_template("eliminar.html", form=create_forms)
 
-# Registra la blueprint
-app.register_blueprint(maestros)
 
 if __name__ == '__main__':
     csrf.init_app(app)

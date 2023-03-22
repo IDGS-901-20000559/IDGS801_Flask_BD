@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{%from "_macros.html" import render_field%}
+<h1 style="color:blue;">CALCULADORA RESISTENCIA</h1>
+<div class="container">
+    <form name="sent" action="/resistencias" id="form1" method="POST">
+        <div class="row control-group">
+            <div class="form-group col-xs-12 float-label-form-group controls">
+                {{ render_field(form.bandaUno) }}
+                {{ render_field(form.bandaDos) }}
+                {{ render_field(form.bandaTres) }}          
+        </div>
+        <div class="control-group">
+            <label for="tolerance">Elige la tolerancia</label>
+            <input type="radio" id="opcion1" name="tolerance" value="gold" checked>ORO (5%)
+            <input type="radio" id="opcion2" name="tolerance" value="silver"> PLATA (10%)
+        </div>
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}" />
+        <input type="submit" class="btn btn-success" id="modificar" name="modificar" value="Calcular" />
+
+        <div class="col-xs-6">
+            <br>
+            <center>
+                <h3>RESULTADOS</h3>
+            </center>
+            <table class="table mt-4">
+
+                <thead>
+                    <th>1er Banda</th>
+                    <th>2nda Banda</th>
+                    <th>3er Banda</th>
+                    <th>Tolerancia(color)</th>
+                    <th>Valor (Ohms)</th>
+                    <th>Minimo</th>
+                    <th>Máximo</th>
+                </thead>
+                <tbody>
+
+                    <td style="background-color: {{color1}};">{{ color1 }}</td>
+                    <td style="background-color: {{color2}};">{{ color2 }}</td>
+                    <td style="background-color: {{color3}};">{{ color3 }}</td>
+                    <td style="background-color: {{color4}};">{{ color4 }}</td>
+                    <td style="background-color: beige;">{{ valorNominal }}</td>
+                    <td style="background-color: beige;">{{ minimo }}</td>
+                    <td style="background-color: beige;">{{ maximo }}</td>
+
+                </tbody>
+            </table>
+        </div>
+
+    </form>
+{% endblock %}
